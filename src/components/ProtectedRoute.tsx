@@ -1,7 +1,6 @@
 'use client';
 
 import { useAuthContext } from '@/providers/AuthProvider';
-import { LoaderCircle } from 'lucide-react';
 
 import { useEffect } from 'react';
 
