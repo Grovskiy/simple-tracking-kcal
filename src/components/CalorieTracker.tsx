@@ -32,8 +32,8 @@ const CalorieTracker: React.FC<CalorieTrackerProps> = ({
 
   return (
     <div className="mx-auto max-w-lg space-y-4 p-4">
-      <details className="dropdown w-full">
-        <summary className="btn btn-outline btn-neutral btn-sm btn-block mb-2">
+      <details className="dropdown w-full flex">
+        <summary className="btn btn-outline btn-neutral btn-sm mx-auto">
           Додати новий продукт
         </summary>
         <div className="dropdown-content glass z-[1] w-full rounded-box shadow">

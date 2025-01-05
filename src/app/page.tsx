@@ -16,6 +16,8 @@ export default function Home() {
 
   const { entries, addEntry, deleteEntry, loading: entriesLoading } = useEntries(user?.uid);
 
+  const nickname = user?.email && user.email.split('@')[0];
+
   if (productsLoading || entriesLoading) {
     return (
       <ProtectedRoute>
@@ -30,7 +32,7 @@ export default function Home() {
     <ProtectedRoute>
       <div className="grid min-h-screen grid-rows-[1fr_55px] justify-items-center font-[family-name:var(--font-geist-sans)]">
         <main className="row-start-1 flex flex-col items-start">
-          <div className="mx-auto pb-4 pt-8 text-sm">Вітаю, {user?.email}</div>
+          <div className="mx-auto pb-4 pt-8 text-sm">Вітаю, {user?.displayName || nickname}</div>
           <CalorieTracker
             products={products}
             entries={entries}

@@ -20,6 +20,8 @@ export const useEntries = (userId: string | undefined) => {
         ...doc.data(),
       })) as Entry[];
 
+      entriesData.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+
       setEntries(entriesData);
       setLoading(false);
     });
