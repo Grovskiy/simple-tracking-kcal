@@ -32,8 +32,14 @@ jobs:
           NEXT_PUBLIC_FIREBASE_APP_ID: ${{ secrets.NEXT_PUBLIC_FIREBASE_APP_ID }}
         run: npm run build
         
+      - name: List directory content # Для дебагу
+        run: ls -la
+        
+      - name: List out directory content # Для дебагу
+        run: ls -la out || echo "out directory not found"
+
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./
+          publish_dir: ./out
