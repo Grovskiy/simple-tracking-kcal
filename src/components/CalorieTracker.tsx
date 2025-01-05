@@ -36,7 +36,7 @@ const CalorieTracker: React.FC<CalorieTrackerProps> = ({
         <summary className="btn btn-outline btn-neutral btn-sm btn-block mb-2">
           Додати новий продукт
         </summary>
-        <div className="dropdown-content glass z-[1] w-full rounded-box p-2 shadow">
+        <div className="dropdown-content glass z-[1] w-full rounded-box shadow">
           <AddProductForm onAddProduct={onAddProduct} />
           <ProductsList products={products} onDeleteProduct={onDeleteProduct} />
         </div>

@@ -98,7 +98,7 @@ export const DailyStats: React.FC<DailyStatsProps> = ({ entries, date, onDeleteE
                   <input
                     type="number"
                     placeholder="1700"
-                    className="input input-md input-bordered w-28"
+                    className="input input-md input-bordered w-28 text-base"
                     value={calorieGoal}
                     onChange={(e) => handleChagenCalorieGoal(e.target.value)}
                   />

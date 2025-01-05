@@ -18,9 +18,11 @@ export default function Home() {
 
   if (productsLoading || entriesLoading) {
     return (
-      <div className="flex min-h-screen items-center justify-center">
-        <span className="loading loading-ring loading-lg"></span>
-      </div>
+      <ProtectedRoute>
+        <div className="flex min-h-screen items-center justify-center">
+          <span className="loading loading-ring loading-lg"></span>
+        </div>
+      </ProtectedRoute>
     );
   }
 

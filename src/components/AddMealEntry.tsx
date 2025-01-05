@@ -44,7 +44,7 @@ export const AddMealEntry: React.FC<AddMealEntryProps> = ({
         <h2 className="card-title text-base">Додати спожиту їжу</h2>
         <form onSubmit={handleSubmit} className="flex gap-2">
           <select
-            className="select select-bordered select-md w-full max-w-xs flex-1"
+            className="select select-bordered select-sm w-full max-w-xs flex-1 text-base"
             value={selectedProduct}
             onChange={(e) => setSelectedProduct(e.target.value)}
           >
@@ -58,11 +58,11 @@ export const AddMealEntry: React.FC<AddMealEntryProps> = ({
           <input
             type="number"
             placeholder="Грам"
-            className="input input-md input-bordered w-32"
+            className="input input-sm input-bordered w-20 text-base"
             value={grams}
             onChange={(e) => setGrams(e.target.value)}
           />
-          <button type="submit" className="btn btn-primary btn-md">
+          <button type="submit" className="btn btn-primary btn-sm">
             <Plus className="h-5 w-5" />
           </button>
         </form>

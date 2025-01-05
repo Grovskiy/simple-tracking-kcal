@@ -32,19 +32,19 @@ export const AddProductForm: React.FC<AddProductFormProps> = ({ onAddProduct }) 
             <input
               type="text"
               placeholder="Цільнозерновий хліб"
-              className="input input-md input-bordered w-full max-w-xs"
+              className="input input-sm input-bordered w-full max-w-xs text-base"
               value={name}
               onChange={(e) => setName(e.target.value)}
             />
           </label>
-          <label className="form-controlmax-w-xs">
+          <label className="form-controlmax-w-xs -mr-2">
             <div className="label">
               <span className="label-text">Ккал на 100г</span>
             </div>
             <input
               type="number"
               placeholder="244"
-              className="input input-md input-bordered w-28"
+              className="input input-sm input-bordered w-20 text-base"
               value={calories}
               onChange={(e) => setCalories(e.target.value)}
             />
@@ -54,7 +54,7 @@ export const AddProductForm: React.FC<AddProductFormProps> = ({ onAddProduct }) 
             <div className="label">
               <span className="label-text">⠀</span>
             </div>
-            <button type="submit" className="btn btn-primary btn-md">
+            <button type="submit" className="btn btn-primary btn-sm">
               <Plus className="h-5 w-5" />
             </button>
           </label>
