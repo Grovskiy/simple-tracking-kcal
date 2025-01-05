@@ -18,7 +18,7 @@ export const GoogleSignInButton: FC = () => {
       onClick={handleSignIn}
       className="btn btn-neutral btn-sm"
     >
-      Sign in with Google
+      Увійдіть за допомогою Google
       <LogIn size={16} />
     </button>
   );

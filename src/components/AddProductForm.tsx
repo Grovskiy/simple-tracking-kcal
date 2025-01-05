@@ -22,7 +22,7 @@ export const AddProductForm: React.FC<AddProductFormProps> = ({ onAddProduct }) 
     return (
         <div className="card card-compact bg-base-100 shadow-xl">
             <div className="card-body">
-                <h2 className="card-title">Додати новий продукт</h2>
+                <h2 className="card-title text-base">Додати новий продукт</h2>
                 <form onSubmit={handleSubmit} className="flex gap-2">
                     <input
                         type="text"

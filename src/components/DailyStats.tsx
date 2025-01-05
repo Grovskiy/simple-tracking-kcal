@@ -40,14 +40,14 @@ export const DailyStats: React.FC<DailyStatsProps> = ({ entries, date, onDeleteE
     <div className="card card-compact bg-base-100 shadow-xl">
       <div className="card-body">
         <div className="flex justify-between items-center">
-          <h2 className="card-title">
+          <h2 className="card-title text-base">
             {formatDate(date)}
           </h2>
-          <div className="text-2xl font-bold">
+          <div className="text-lg font-bold">
             {totalCalories} ккал
           </div>
         </div>
-        <div className="divider"></div>
+        <div className="divider my-2"></div>
         <div className="space-y-2">
           {entries.map(entry => (
             <div key={entry.id} className="flex justify-between items-center px-2 bg-base-200 rounded-lg">

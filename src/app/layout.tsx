@@ -14,8 +14,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Tracking kcal",
-  description: "Very easy kcal tracking",
+  title: "Відстеження ккал",
+  description: "Дуже просте відстеження ккал",
 };
 
 export default function RootLayout({
@@ -24,7 +24,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="uk">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-gradient-to-r from-rose-100 to-teal-100`}
       >

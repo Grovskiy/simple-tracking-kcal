@@ -33,7 +33,7 @@ export const ProductsList: React.FC<ProductsListProps> = ({ products, onDeletePr
   return (
     <div className="card card-compact bg-base-100 shadow-xl">
       <div className="card-body">
-        <h2 className="card-title">Мої продукти</h2>
+        <h2 className="card-title text-base">Мої продукти</h2>
         <div className="space-y-2">
           {products.map(product => (
             <div key={product.id} className="flex justify-between items-center px-2 bg-base-200 rounded-lg">

@@ -36,7 +36,7 @@ export const AddMealEntry: React.FC<AddMealEntryProps> = ({ products, onAddEntry
     return (
         <div className="card card-compact bg-base-100 shadow-xl">
             <div className="card-body">
-                <h2 className="card-title">Додати спожиту їжу</h2>
+                <h2 className="card-title text-base">Додати спожиту їжу</h2>
                 <form onSubmit={handleSubmit} className="flex gap-2">
                     <select
                         className="select select-sm select-bordered flex-1 w-full max-w-xs"
