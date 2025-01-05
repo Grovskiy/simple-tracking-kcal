@@ -1,12 +1,13 @@
-import React, { useState } from 'react';
-import { DailyStats } from './DailyStats';
-import { ProductsList } from './ProductList';
-import { getTodayDate } from '@/utils/getTodayDate';
-import { AddMealEntry } from './AddMealEntry';
-import { DateSelector } from './DateSelector';
-import { AddProductForm } from './AddProductForm';
 import { Entry, Product } from '@/types';
+import { getTodayDate } from '@/utils/getTodayDate';
 
+import React, { useState } from 'react';
+
+import { AddMealEntry } from './AddMealEntry';
+import { AddProductForm } from './AddProductForm';
+import { DailyStats } from './DailyStats';
+import { DateSelector } from './DateSelector';
+import { ProductsList } from './ProductList';
 
 interface CalorieTrackerProps {
   products: Product[];
@@ -23,30 +24,26 @@ const CalorieTracker: React.FC<CalorieTrackerProps> = ({
   onAddProduct,
   onAddEntry,
   onDeleteProduct,
-  onDeleteEntry }) => {
-
+  onDeleteEntry,
+}) => {
   const [selectedDate, setSelectedDate] = useState(getTodayDate());
 
-  const dailyEntries = entries.filter((entry: { date: string; }) => entry.date === selectedDate);
+  const dailyEntries = entries.filter((entry: { date: string }) => entry.date === selectedDate);
 
   return (
-    <div className="max-w-lg mx-auto p-4">
-      <AddProductForm onAddProduct={onAddProduct} />
+    <div className="mx-auto max-w-lg space-y-4 p-4">
+      <details className="dropdown w-full">
+        <summary className="btn btn-outline btn-neutral btn-sm btn-block mb-2">
+          Додати новий продукт
+        </summary>
+        <div className="dropdown-content glass z-[1] w-full rounded-box p-2 shadow">
+          <AddProductForm onAddProduct={onAddProduct} />
+          <ProductsList products={products} onDeleteProduct={onDeleteProduct} />
+        </div>
+      </details>
       <DateSelector date={selectedDate} onDateChange={setSelectedDate} />
-      <AddMealEntry
-        products={products}
-        onAddEntry={onAddEntry}
-        selectedDate={selectedDate}
-      />
-      <div className="my-4">
-        <ProductsList
-          products={products}
-          onDeleteProduct={onDeleteProduct}
-        />
-      </div>
-      <div className="my-4">
-        <DailyStats entries={dailyEntries} date={selectedDate} onDeleteEntry={onDeleteEntry} />
-      </div>
+      <AddMealEntry products={products} onAddEntry={onAddEntry} selectedDate={selectedDate} />
+      <DailyStats entries={dailyEntries} date={selectedDate} onDeleteEntry={onDeleteEntry} />
     </div>
   );
 };

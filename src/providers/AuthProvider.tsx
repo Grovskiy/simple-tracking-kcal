@@ -1,7 +1,9 @@
-'use client'
+'use client';
 
-import { createContext, useContext, ReactNode } from 'react';
 import { User } from 'firebase/auth';
+
+import { ReactNode, createContext, useContext } from 'react';
+
 import { useAuth } from '@/hooks/useAuth';
 
 interface AuthContextType {
@@ -14,13 +16,9 @@ interface AuthContextType {
 const AuthContext = createContext<AuthContextType | null>(null);
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
-  const auth = useAuth(); // Ваш хук useAuth з попереднього прикладу
+  const auth = useAuth();
 
-  return (
-    <AuthContext.Provider value={auth}>
-      {children}
-    </AuthContext.Provider>
-  );
+  return <AuthContext.Provider value={auth}>{children}</AuthContext.Provider>;
 };
 
 export const useAuthContext = () => {

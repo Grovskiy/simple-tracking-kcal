@@ -1,9 +1,12 @@
-"use client"
+'use client';
+
 import { useEffect } from 'react';
+
 import { useRouter } from 'next/navigation';
-import { useAuth } from '@/hooks/useAuth';
+
 import { GoogleSignInButton } from '@/components/GoogleSignInButton';
-import { LoaderCircle } from 'lucide-react';
+
+import { useAuth } from '@/hooks/useAuth';
 
 export default function AuthPage() {
   const { user, loading } = useAuth();
@@ -16,14 +19,20 @@ export default function AuthPage() {
   }, [user, loading, router]);
 
   if (loading) {
-    return <div className='min-h-screen flex items-center justify-center'><div className='animate-spin ml-2'><LoaderCircle size={34} strokeWidth={1} /></div></div>;
+    return (
+      <div className="flex min-h-screen items-center justify-center">
+        <span className="loading loading-ring loading-lg"></span>
+      </div>
+    );
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center">
-      <div className="p-8 bg-white rounded-lg shadow-lg">
-        <h1 className="text-lg font-semi text-center mb-2">Ласкаво просимо</h1>
-        <GoogleSignInButton />
+    <div className="flex min-h-screen items-center justify-center">
+      <div className="card card-compact bg-base-100 shadow-xl">
+        <div className="card-body">
+          <h1 className="card-title mx-auto text-center text-base">Ласкаво просимо</h1>
+          <GoogleSignInButton />
+        </div>
       </div>
     </div>
   );

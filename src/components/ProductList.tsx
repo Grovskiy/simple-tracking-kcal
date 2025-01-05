@@ -1,7 +1,9 @@
-import { Trash2 } from "lucide-react";
-import { useState } from "react";
-import { DeleteConfirmModal } from "./DeleteConfirmModal";
-import { Product } from "@/types";
+import { Product } from '@/types';
+import { Trash2 } from 'lucide-react';
+
+import { useState } from 'react';
+
+import { DeleteConfirmModal } from './DeleteConfirmModal';
 
 interface ProductsListProps {
   products: Product[];
@@ -14,7 +16,7 @@ const defaultProduct: Product = {
   caloriesPer100g: 0,
   userId: '',
   createdAt: '',
-}
+};
 
 export const ProductsList: React.FC<ProductsListProps> = ({ products, onDeleteProduct }) => {
   const [deleteModal, setDeleteModal] = useState({ isOpen: false, product: defaultProduct });
@@ -31,20 +33,23 @@ export const ProductsList: React.FC<ProductsListProps> = ({ products, onDeletePr
   };
 
   return (
-    <div className="card card-compact bg-base-100 shadow-xl">
+    <div className="card card-compact">
       <div className="card-body">
         <h2 className="card-title text-base">Мої продукти</h2>
         <div className="space-y-2">
-          {products.map(product => (
-            <div key={product.id} className="flex justify-between items-center px-2 bg-base-200 rounded-lg">
+          {products.map((product) => (
+            <div
+              key={product.id}
+              className="flex items-center justify-between rounded-lg bg-base-100 px-2 shadow-md"
+            >
               <div>
                 <span className="font-medium">{product.name}</span>
-                <span className="text-sm text-base-content/70"> • {product.caloriesPer100g} ккал/100г</span>
+                <span className="text-sm text-base-content/70">
+                  {' '}
+                  • {product.caloriesPer100g} ккал/100г
+                </span>
               </div>
-              <button
-                className="btn btn-ghost btn-sm"
-                onClick={() => handleDelete(product)}
-              >
+              <button className="btn btn-ghost btn-sm" onClick={() => handleDelete(product)}>
                 <Trash2 size={16} />
               </button>
             </div>

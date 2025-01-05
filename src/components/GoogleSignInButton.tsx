@@ -1,5 +1,7 @@
-import { FC } from 'react';
 import { LogIn } from 'lucide-react';
+
+import { FC } from 'react';
+
 import { useAuth } from '@/hooks/useAuth';
 
 export const GoogleSignInButton: FC = () => {
@@ -14,10 +16,7 @@ export const GoogleSignInButton: FC = () => {
   };
 
   return (
-    <button 
-      onClick={handleSignIn}
-      className="btn btn-neutral btn-sm"
-    >
+    <button onClick={handleSignIn} className="btn btn-neutral btn-sm">
       Увійдіть за допомогою Google
       <LogIn size={16} />
     </button>

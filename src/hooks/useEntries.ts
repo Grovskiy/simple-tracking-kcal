@@ -1,15 +1,9 @@
-import { useState, useEffect } from 'react';
-import { 
-  collection, 
-  query, 
-  where, 
-  addDoc, 
-  deleteDoc,
-  doc,
-  onSnapshot
-} from 'firebase/firestore';
-import { db } from '@/lib/firebase';
 import type { Entry } from '@/types';
+import { addDoc, collection, deleteDoc, doc, onSnapshot, query, where } from 'firebase/firestore';
+
+import { useEffect, useState } from 'react';
+
+import { db } from '@/lib/firebase';
 
 export const useEntries = (userId: string | undefined) => {
   const [entries, setEntries] = useState<Entry[]>([]);
@@ -18,17 +12,14 @@ export const useEntries = (userId: string | undefined) => {
   useEffect(() => {
     if (!userId) return;
 
-    const q = query(
-      collection(db, 'entries'),
-      where('userId', '==', userId)
-    );
+    const q = query(collection(db, 'entries'), where('userId', '==', userId));
 
     const unsubscribe = onSnapshot(q, (snapshot) => {
-      const entriesData = snapshot.docs.map(doc => ({
+      const entriesData = snapshot.docs.map((doc) => ({
         id: doc.id,
-        ...doc.data()
+        ...doc.data(),
       })) as Entry[];
-      
+
       setEntries(entriesData);
       setLoading(false);
     });
@@ -41,7 +32,7 @@ export const useEntries = (userId: string | undefined) => {
       await addDoc(collection(db, 'entries'), {
         ...entryData,
         userId,
-        createdAt: new Date().toISOString()
+        createdAt: new Date().toISOString(),
       });
     } catch (error) {
       console.error('Error adding entry:', error);
