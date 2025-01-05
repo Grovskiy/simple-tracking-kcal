@@ -12,7 +12,7 @@ export const DeleteConfirmModal: React.FC<DeleteConfirmModalProps> = ({ isOpen, 
     <div className="modal modal-open">
       <div className="modal-box">
         <h3 className="font-bold text-lg">Підтвердження видалення</h3>
-        <p className="py-4">Ви впевнені, що хочете видалити "{itemName}"?</p>
+        <p className="py-4">Ви впевнені, що хочете видалити {itemName}?</p>
         <div className="modal-action">
           <button className="btn" onClick={onCancel}>Скасувати</button>
           <button className="btn btn-error" onClick={onConfirm}>Видалити</button>
