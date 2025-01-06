@@ -20,7 +20,9 @@ export const useProducts = (userId: string | undefined) => {
         ...doc.data(),
       })) as Product[];
 
-      productsData.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+      productsData.sort(
+        (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+      );
 
       setProducts(productsData);
       setLoading(false);

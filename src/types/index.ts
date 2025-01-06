@@ -16,3 +16,17 @@ export interface Entry {
   userId: string;
   createdAt: string;
 }
+
+export interface CalorieGoal {
+  id: string;
+  userId: string;
+  value: number;
+  startDate: string;
+  createdAt: string;
+}
+
+export interface UserProfile {
+  userId: string;
+  currentGoal: number;
+  lastUpdated: string;
+}
