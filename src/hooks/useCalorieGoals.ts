@@ -3,12 +3,10 @@ import {
   addDoc,
   collection,
   doc,
-  getDocs,
   onSnapshot,
   orderBy,
   query,
   setDoc,
-  updateDoc,
   where,
 } from 'firebase/firestore';
 
@@ -57,6 +55,7 @@ export const useCalorieGoals = (userId: string | undefined) => {
   }, [userId]);
 
   const setNewGoal = async (value: number) => {
+    if (!userId) return;
     try {
       await addDoc(collection(db, 'calorieGoals'), {
         userId,
@@ -65,7 +64,6 @@ export const useCalorieGoals = (userId: string | undefined) => {
         createdAt: new Date().toISOString(),
       });
 
-      // Оновлюємо поточну ціль в профілі
       await setDoc(
         doc(db, 'userProfiles', userId),
         {
