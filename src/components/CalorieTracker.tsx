@@ -4,10 +4,8 @@ import { getTodayDate } from '@/utils/getTodayDate';
 import React, { useState } from 'react';
 
 import { AddMealEntry } from './AddMealEntry';
-import { AddProductForm } from './AddProductForm';
 import { DailyStats } from './DailyStats';
 import { DateSelector } from './DateSelector';
-import { ProductsList } from './ProductList';
 
 interface CalorieTrackerProps {
   products: Product[];
@@ -21,9 +19,7 @@ interface CalorieTrackerProps {
 const CalorieTracker: React.FC<CalorieTrackerProps> = ({
   products,
   entries,
-  onAddProduct,
   onAddEntry,
-  onDeleteProduct,
   onDeleteEntry,
 }) => {
   const [selectedDate, setSelectedDate] = useState(getTodayDate());
@@ -31,19 +27,18 @@ const CalorieTracker: React.FC<CalorieTrackerProps> = ({
   const dailyEntries = entries.filter((entry: { date: string }) => entry.date === selectedDate);
 
   return (
-    <div className="mx-auto max-w-lg space-y-4 p-4">
-      <details className="dropdown w-full">
-        <summary className="btn btn-outline btn-neutral btn-sm btn-block">
-          Додати новий продукт
-        </summary>
-        <div className="dropdown-content glass z-[1] mt-2 w-full rounded-box shadow">
-          <AddProductForm onAddProduct={onAddProduct} />
-          <ProductsList products={products} onDeleteProduct={onDeleteProduct} />
+    <div className="min-h-screen pb-28">
+      <div className="bg-background shadow-sm">
+        <div className="mx-auto max-w-xl px-4 py-2">
+          <DateSelector date={selectedDate} onDateChange={setSelectedDate} />
         </div>
-      </details>
-      <DateSelector date={selectedDate} onDateChange={setSelectedDate} />
+      </div>
+
+      <div className="mx-auto max-w-xl px-4 py-4">
+        <DailyStats entries={dailyEntries} onDeleteEntry={onDeleteEntry} />
+      </div>
+
       <AddMealEntry products={products} onAddEntry={onAddEntry} selectedDate={selectedDate} />
-      <DailyStats entries={dailyEntries} date={selectedDate} onDeleteEntry={onDeleteEntry} />
     </div>
   );
 };

@@ -14,7 +14,7 @@ export default function AuthPage() {
 
   useEffect(() => {
     if (user && !loading) {
-      router.push('/');
+      router.push('/dashboard');
     }
   }, [user, loading, router]);
 
