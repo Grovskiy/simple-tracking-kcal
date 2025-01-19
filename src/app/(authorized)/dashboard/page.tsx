@@ -6,13 +6,18 @@ import CalorieTracker from '@/components/CalorieTracker';
 
 import { useEntries } from '@/hooks/useEntries';
 import { useProducts } from '@/hooks/useProducts';
+import { useState } from 'react';
+import { getTodayDate } from '@/utils/getTodayDate';
 
 export default function DashboardPage() {
   const { user } = useAuthContext();
 
-  const { products, addProduct, deleteProduct, loading: productsLoading } = useProducts(user?.uid);
+  const { products, loading: productsLoading } = useProducts(user?.uid);
 
-  const { entries, addEntry, deleteEntry, loading: entriesLoading } = useEntries(user?.uid);
+  const [selectedDate, setSelectedDate] = useState(getTodayDate());
+
+  const { entries, addEntry, deleteEntry, loading: entriesLoading } = useEntries(user?.uid, selectedDate);
+
 
   if (productsLoading || entriesLoading) {
     return (
@@ -26,10 +31,10 @@ export default function DashboardPage() {
     <CalorieTracker
       products={products}
       entries={entries}
-      onAddProduct={addProduct}
+      selectedDate={selectedDate}
       onAddEntry={addEntry}
-      onDeleteProduct={deleteProduct}
       onDeleteEntry={deleteEntry}
+      onDateChange={setSelectedDate}
     />
   );
 }

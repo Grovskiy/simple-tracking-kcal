@@ -5,9 +5,11 @@ import { useEffect, useState } from 'react';
 
 import { db } from '@/lib/firebase';
 
-export const useEntries = (userId: string | undefined) => {
+export const useEntries = (userId: string | undefined, specificDate: string) => {
   const [entries, setEntries] = useState<Entry[]>([]);
   const [loading, setLoading] = useState(true);
+
+  console.log('specificDate', specificDate);
 
   useEffect(() => {
     if (!userId) return;
