@@ -158,8 +158,7 @@ export const useCalorieGoals = (userId: string | undefined): UseCalorieGoalsRetu
       setCurrentGoal(value);
       setGoalHistory(prev => [{ ...newGoal, id: 'temp' } as CalorieGoal, ...prev]);
 
-      // Оновлення в базі даних
-      const goalDoc = await addDoc(collection(db, GOALS_COLLECTION), newGoal);
+      await addDoc(collection(db, GOALS_COLLECTION), newGoal);
 
       await setDoc(
         doc(db, PROFILES_COLLECTION, userId),

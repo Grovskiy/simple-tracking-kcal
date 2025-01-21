@@ -173,7 +173,7 @@ export const DailyStats: React.FC<DailyStatsProps> = ({ entries, onDeleteEntry }
                     </div>
 
                   </div>
-                  <CenteredProgress value={percentage} className="h-1 -mt-1" />
+                  <CenteredProgress value={percentage} className="-mt-[2px]" />
                 </div>
               )
             })}

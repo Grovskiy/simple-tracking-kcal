@@ -1,5 +1,5 @@
 import type { Entry } from '@/types';
-import { addDoc, collection, deleteDoc, doc, DocumentReference, getDoc, getDocs, orderBy, query, where } from 'firebase/firestore';
+import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, orderBy, query, where } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 import { db } from '@/lib/firebase';
 

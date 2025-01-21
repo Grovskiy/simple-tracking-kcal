@@ -69,7 +69,7 @@ export const AddMealEntry: React.FC<AddMealEntryProps> = ({ products, onAddEntry
         <DialogHeader>
           <DialogTitle>Додати спожиту їжу</DialogTitle>
           <DialogDescription>
-            Додайте продукти до свого щоденника. Натисніть кнопку "Додати" після завершення.
+            Додайте продукти до свого щоденника. Натисніть кнопку &#34;Додати&#34; після завершення.
           </DialogDescription>
         </DialogHeader>
         <form onSubmit={handleSubmit} className="space-y-4">
