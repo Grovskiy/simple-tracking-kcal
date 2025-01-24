@@ -61,7 +61,7 @@ export const AddMealEntry: React.FC<AddMealEntryProps> = ({ products, onAddEntry
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button className="fixed bottom-20 right-6 h-14 w-14 rounded-full p-0" size="icon">
+        <Button className="fixed bottom-20 right-6 md:right-1/4 h-14 w-14 rounded-full p-0" size="icon">
           <Plus className="h-6 w-6" />
         </Button>
       </DialogTrigger>

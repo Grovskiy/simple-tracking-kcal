@@ -35,7 +35,7 @@ export const DailyStats: React.FC<DailyStatsProps> = ({ entries, onDeleteEntry }
 
   const totalCalories = entries.reduce((sum, entry) => sum + entry.calories, 0);
   const remainingCalories = currentGoal ? currentGoal - totalCalories : 0;
-  const progressPercentage = Math.min((totalCalories / (currentGoal ? currentGoal : 0)) * 100, 100);
+  const progressPercentage = (totalCalories / (currentGoal ? currentGoal : 0)) * 100;
 
   const getStatusColors = () => {
     if (remainingCalories >= 0) {
@@ -44,7 +44,7 @@ export const DailyStats: React.FC<DailyStatsProps> = ({ entries, onDeleteEntry }
         text: 'text-primary',
       };
     }
-    if (Math.abs(remainingCalories) <= 80) {
+    if (Math.abs(remainingCalories) <= 110) {
       return {
         bar: 'bg-warning',
         text: 'text-warning',
@@ -63,7 +63,7 @@ export const DailyStats: React.FC<DailyStatsProps> = ({ entries, onDeleteEntry }
         text: 'text-primary',
       };
     }
-    if (Math.abs(remainingCalories) <= 80) {
+    if (Math.abs(remainingCalories) <= 110) {
       return {
         bar: 'progress-warning',
         text: 'text-warning',
@@ -103,7 +103,7 @@ export const DailyStats: React.FC<DailyStatsProps> = ({ entries, onDeleteEntry }
         <CardContent>
           <div className="flex items-center justify-between">
             <span className="text-lg font-medium">Прогрес</span>
-            <span className="text-lg font-medium">
+            <span className={`text-lg font-medium ${statusColors.text}`}>
               {' '}
               {goalLoading ? (
                 <span className="loading loading-ring loading-xs mr-1"></span>
@@ -154,7 +154,7 @@ export const DailyStats: React.FC<DailyStatsProps> = ({ entries, onDeleteEntry }
         <CardContent>
           <div className="space-y-2">
             {entries.map((entry) => {
-              const percentage = (entry.calories / totalCalories) * 100
+              const percentage = currentGoal ? ((entry.calories / currentGoal) * 100) : 0;
               return (
                 <div
                   key={entry.id}

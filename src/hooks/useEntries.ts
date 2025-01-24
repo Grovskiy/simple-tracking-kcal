@@ -1,5 +1,5 @@
 import type { Entry } from '@/types';
-import { addDoc, collection, deleteDoc, doc, onSnapshot, query, where } from 'firebase/firestore';
+import { addDoc, collection, deleteDoc, doc, onSnapshot, orderBy, query, where } from 'firebase/firestore';
 
 import { useEffect, useState } from 'react';
 
@@ -9,12 +9,16 @@ export const useEntries = (userId: string | undefined, specificDate: string) => 
   const [entries, setEntries] = useState<Entry[]>([]);
   const [loading, setLoading] = useState(true);
 
-  console.log('specificDate', specificDate);
 
   useEffect(() => {
     if (!userId) return;
 
-    const q = query(collection(db, 'entries'), where('userId', '==', userId));
+    const q = query(
+      collection(db, 'entries'),
+      where('userId', '==', userId),
+      where('date', '==', specificDate),
+      orderBy('createdAt', 'desc')
+    );
 
     const unsubscribe = onSnapshot(q, (snapshot) => {
       const entriesData = snapshot.docs.map((doc) => ({
@@ -22,14 +26,12 @@ export const useEntries = (userId: string | undefined, specificDate: string) => 
         ...doc.data(),
       })) as Entry[];
 
-      entriesData.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
-
       setEntries(entriesData);
       setLoading(false);
     });
 
     return () => unsubscribe();
-  }, [userId]);
+  }, [userId, specificDate]);
 
   const addEntry = async (entryData: Omit<Entry, 'id' | 'userId' | 'createdAt'>) => {
     try {
