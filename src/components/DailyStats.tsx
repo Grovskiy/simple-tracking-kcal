@@ -8,6 +8,7 @@ import { useCalorieGoals } from '@/hooks/useCalorieGoals';
 
 import { DeleteConfirmModal } from './DeleteConfirmModal';
 import { Card, CardContent } from './ui/card';
+import { CenteredProgress } from './ui/centered-progress';
 
 interface DailyStatsProps {
   entries: Entry[];
@@ -152,23 +153,30 @@ export const DailyStats: React.FC<DailyStatsProps> = ({ entries, onDeleteEntry }
       <Card>
         <CardContent>
           <div className="space-y-2">
-            {entries.map((entry) => (
-              <div
-                key={entry.id}
-                className="flex items-center justify-between rounded-lg bg-base-200 px-2"
-              >
-                <div>
-                  <span className="font-medium">{entry.productName}</span>
-                  <span className="text-sm text-base-content/70"> • {entry.grams}г</span>
+            {entries.map((entry) => {
+              const percentage = (entry.calories / totalCalories) * 100
+              return (
+                <div
+                  key={entry.id}
+                  className="rounded-lg bg-base-200 px-2"
+                >
+                  <div className='flex items-center justify-between '>
+                    <div>
+                      <span className="font-medium">{entry.productName}</span>
+                      <span className="text-sm text-base-content/70"> • {entry.grams}г</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <span className="text-sm font-medium">{entry.calories} ккал</span>
+                      <button className="btn btn-ghost btn-sm" onClick={() => handleDelete(entry)}>
+                        <Trash2 size={16} />
+                      </button>
+                    </div>
+
+                  </div>
+                  <CenteredProgress value={percentage} className="-mt-[2px]" />
                 </div>
-                <div className="flex items-center gap-2">
-                  <span className="text-sm font-medium">{entry.calories} ккал</span>
-                  <button className="btn btn-ghost btn-sm" onClick={() => handleDelete(entry)}>
-                    <Trash2 size={16} />
-                  </button>
-                </div>
-              </div>
-            ))}
+              )
+            })}
           </div>
           <DeleteConfirmModal
             isOpen={deleteModal.isOpen}

@@ -70,3 +70,31 @@ body {
     @apply bg-background text-foreground;
   }
 }
+
+.react-select-container .react-select__control {
+  @apply border-input bg-background;
+}
+
+.react-select-container .react-select__control:hover {
+  @apply border-primary;
+}
+
+.react-select-container .react-select__value-container {
+  @apply px-2 py-1;
+}
+
+.react-select-container .react-select__input-container {
+  @apply text-foreground;
+}
+
+.react-select-container .react-select__menu {
+  @apply border border-input bg-background;
+}
+
+.react-select-container .react-select__option {
+  @apply bg-background text-foreground hover:bg-accent hover:text-accent-foreground;
+}
+
+.react-select-container .react-select__single-value {
+  @apply text-foreground;
+}
