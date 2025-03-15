@@ -1,4 +1,4 @@
-import type { CalorieGoal, UserProfile } from '@/types';
+import type { CalorieGoal } from '@/types';
 import {
   addDoc,
   collection,
@@ -14,9 +14,10 @@ import { useEffect, useState } from 'react';
 
 import { db } from '@/lib/firebase';
 
-export const useCalorieGoals = (userId: string | undefined) => {
+export const useCalorieGoals = (userId: string | undefined, selectedDate?: string) => {
   const [goalHistory, setGoalHistory] = useState<CalorieGoal[]>([]);
   const [currentGoal, setCurrentGoal] = useState<number | null>(null);
+  const [goalForDate, setGoalForDate] = useState<number | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -35,24 +36,34 @@ export const useCalorieGoals = (userId: string | undefined) => {
       })) as CalorieGoal[];
 
       setGoalHistory(goals);
+
+      if (goals.length > 0) {
+        setCurrentGoal(goals[0].value);
+      }
+
+      if (selectedDate) {
+        const selectedDateTimestamp = new Date(selectedDate).getTime();
+
+        let appropriateGoal = null;
+
+        for (const goal of goals) {
+          const goalStartDate = new Date(goal.startDate).setHours(0, 0, 0, 0);
+
+          if (goalStartDate <= selectedDateTimestamp) {
+            appropriateGoal = goal;
+            break;
+          }
+        }
+        setGoalForDate(appropriateGoal ? appropriateGoal.value : null);
+      } else {
+        setGoalForDate(goals.length > 0 ? goals[0].value : null);
+      }
+
       setLoading(false);
     });
 
     return () => unsubscribe();
-  }, [userId]);
-
-  useEffect(() => {
-    if (!userId) return;
-
-    const docRef = doc(db, 'userProfiles', userId);
-    const unsubscribe = onSnapshot(docRef, (doc) => {
-      if (doc.exists()) {
-        setCurrentGoal((doc.data() as UserProfile).currentGoal);
-      }
-    });
-
-    return () => unsubscribe();
-  }, [userId]);
+  }, [userId, selectedDate]);
 
   const setNewGoal = async (value: number) => {
     if (!userId) return;
@@ -82,6 +93,7 @@ export const useCalorieGoals = (userId: string | undefined) => {
   return {
     goalHistory,
     currentGoal,
+    goalForDate,
     setNewGoal,
     loading,
   };

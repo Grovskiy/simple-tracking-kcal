@@ -13,6 +13,7 @@ import { CenteredProgress } from './ui/centered-progress';
 interface DailyStatsProps {
   entries: Entry[];
   onDeleteEntry: (productId: Entry['id']) => void;
+  selectedDate: string;
 }
 
 const defaultEntry = {
@@ -26,16 +27,16 @@ const defaultEntry = {
   createdAt: '',
 };
 
-export const DailyStats: React.FC<DailyStatsProps> = ({ entries, onDeleteEntry }) => {
+export const DailyStats: React.FC<DailyStatsProps> = ({ entries, onDeleteEntry, selectedDate }) => {
   const [deleteModal, setDeleteModal] = useState({ isOpen: false, entry: defaultEntry });
 
   const { user } = useAuthContext();
 
-  const { currentGoal, loading: goalLoading } = useCalorieGoals(user?.uid);
+  const { goalForDate, loading: goalLoading } = useCalorieGoals(user?.uid, selectedDate);
 
   const totalCalories = entries.reduce((sum, entry) => sum + entry.calories, 0);
-  const remainingCalories = currentGoal ? currentGoal - totalCalories : 0;
-  const progressPercentage = (totalCalories / (currentGoal ? currentGoal : 0)) * 100;
+  const remainingCalories = goalForDate ? goalForDate - totalCalories : 0;
+  const progressPercentage = goalForDate ? (totalCalories / goalForDate) * 100 : 0;
 
   const getStatusColors = () => {
     if (remainingCalories >= 0) {
@@ -144,7 +145,7 @@ export const DailyStats: React.FC<DailyStatsProps> = ({ entries, onDeleteEntry }
               </div>
               <div className="text-right">
                 <p className="text-gray-500">Ціль</p>
-                <p className="font-medium">{currentGoal} ккал</p>
+                <p className="font-medium">{goalForDate} ккал</p>
               </div>
             </div>
           </div>
@@ -154,7 +155,7 @@ export const DailyStats: React.FC<DailyStatsProps> = ({ entries, onDeleteEntry }
         <CardContent>
           <div className="space-y-2">
             {entries.map((entry) => {
-              const percentage = currentGoal ? ((entry.calories / currentGoal) * 100) : 0;
+              const percentage = goalForDate ? ((entry.calories / goalForDate) * 100) : 0;
               return (
                 <div
                   key={entry.id}
