@@ -158,12 +158,12 @@ export const DailyStats: React.FC<DailyStatsProps> = ({ entries, onDeleteEntry }
               return (
                 <div
                   key={entry.id}
-                  className="rounded-lg bg-base-200 px-2"
+                  className="rounded-lg bg-base-200 pl-2"
                 >
-                  <div className='flex items-center justify-between '>
-                    <div>
-                      <span className="font-medium">{entry.productName}</span>
-                      <span className="text-sm text-base-content/70"> • {entry.grams}г</span>
+                  <div className='flex items-center justify-between gap-x-2'>
+                    <div className='flex items-center gap-x-2 flex-1 min-w-0'>
+                      <span className="font-medium truncate block overflow-hidden text-overflow-ellipsis whitespace-nowrap">{entry.productName}</span>
+                      <span className="text-sm text-base-content/70 whitespace-nowrap"> • {entry.grams}г</span>
                     </div>
                     <div className="flex items-center gap-2">
                       <span className="text-sm font-medium">{entry.calories} ккал</span>

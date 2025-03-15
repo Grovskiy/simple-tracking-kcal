@@ -40,14 +40,15 @@ export const ProductsList: React.FC<ProductsListProps> = ({ products, onDeletePr
             key={product.id}
             className="flex items-center justify-between rounded-md bg-base-200 px-2"
           >
-            <div>
-              <span className="font-medium">{product.name}</span>
-              <span className="text-sm text-base-content/70">
-                {' '}
-                • {product.caloriesPer100g} ккал/100г
+            <div className="flex items-center justify-between gap-x-2 flex-1 min-w-0">
+              <span className="font-medium truncate block overflow-hidden text-overflow-ellipsis whitespace-nowrap">
+                {product.name}
+              </span>
+              <span className="text-sm text-base-content/70 whitespace-nowrap">
+                {product.caloriesPer100g} ккал
               </span>
             </div>
-            <button className="btn btn-ghost btn-sm" onClick={() => handleDelete(product)}>
+            <button className="btn btn-ghost btn-sm flex-shrink-0" onClick={() => handleDelete(product)}>
               <Trash2 size={16} />
             </button>
           </div>
