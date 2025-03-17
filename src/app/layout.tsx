@@ -3,10 +3,10 @@ import { AuthProvider } from '@/providers/AuthProvider';
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
 
+import { ThemeWatcher } from '@/components/ThemeWatcher';
 import { ThemeProvider } from '@/components/theme-provider';
 
 import './globals.css';
-import { ThemeWatcher } from '@/components/ThemeWatcher';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',

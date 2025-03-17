@@ -1,13 +1,14 @@
 'use client';
 
 import { useAuthContext } from '@/providers/AuthProvider';
+import { getTodayDate } from '@/utils/getTodayDate';
+
+import { useState } from 'react';
 
 import CalorieTracker from '@/components/CalorieTracker';
 
 import { useEntries } from '@/hooks/useEntries';
 import { useProducts } from '@/hooks/useProducts';
-import { useState } from 'react';
-import { getTodayDate } from '@/utils/getTodayDate';
 
 export default function DashboardPage() {
   const { user } = useAuthContext();
@@ -16,8 +17,12 @@ export default function DashboardPage() {
 
   const [selectedDate, setSelectedDate] = useState(getTodayDate());
 
-  const { entries, addEntry, deleteEntry, loading: entriesLoading } = useEntries(user?.uid, selectedDate);
-
+  const {
+    entries,
+    addEntry,
+    deleteEntry,
+    loading: entriesLoading,
+  } = useEntries(user?.uid, selectedDate);
 
   if (productsLoading || entriesLoading) {
     return (

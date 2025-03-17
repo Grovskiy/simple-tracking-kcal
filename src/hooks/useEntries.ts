@@ -1,5 +1,14 @@
 import type { Entry } from '@/types';
-import { addDoc, collection, deleteDoc, doc, onSnapshot, orderBy, query, where } from 'firebase/firestore';
+import {
+  addDoc,
+  collection,
+  deleteDoc,
+  doc,
+  onSnapshot,
+  orderBy,
+  query,
+  where,
+} from 'firebase/firestore';
 
 import { useEffect, useState } from 'react';
 
@@ -8,7 +17,6 @@ import { db } from '@/lib/firebase';
 export const useEntries = (userId: string | undefined, specificDate: string) => {
   const [entries, setEntries] = useState<Entry[]>([]);
   const [loading, setLoading] = useState(true);
-
 
   useEffect(() => {
     if (!userId) return;

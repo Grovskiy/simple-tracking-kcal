@@ -155,16 +155,18 @@ export const DailyStats: React.FC<DailyStatsProps> = ({ entries, onDeleteEntry, 
         <CardContent>
           <div className="space-y-2">
             {entries.map((entry) => {
-              const percentage = goalForDate ? ((entry.calories / goalForDate) * 100) : 0;
+              const percentage = goalForDate ? (entry.calories / goalForDate) * 100 : 0;
               return (
-                <div
-                  key={entry.id}
-                  className="rounded-lg bg-base-200 pl-2"
-                >
-                  <div className='flex items-center justify-between gap-x-2'>
-                    <div className='flex items-center gap-x-2 flex-1 min-w-0'>
-                      <span className="font-medium truncate block overflow-hidden text-overflow-ellipsis whitespace-nowrap">{entry.productName}</span>
-                      <span className="text-sm text-base-content/70 whitespace-nowrap"> • {entry.grams}г</span>
+                <div key={entry.id} className="rounded-lg bg-base-200 pl-2">
+                  <div className="flex items-center justify-between gap-x-2">
+                    <div className="flex min-w-0 flex-1 items-center gap-x-2">
+                      <span className="text-overflow-ellipsis block overflow-hidden truncate whitespace-nowrap font-medium">
+                        {entry.productName}
+                      </span>
+                      <span className="whitespace-nowrap text-sm text-base-content/70">
+                        {' '}
+                        • {entry.grams}г
+                      </span>
                     </div>
                     <div className="flex items-center gap-2">
                       <span className="text-sm font-medium">{entry.calories} ккал</span>
@@ -172,11 +174,10 @@ export const DailyStats: React.FC<DailyStatsProps> = ({ entries, onDeleteEntry, 
                         <Trash2 size={16} />
                       </button>
                     </div>
-
                   </div>
                   <CenteredProgress value={percentage} className="-mt-[2px]" />
                 </div>
-              )
+              );
             })}
           </div>
           <DeleteConfirmModal

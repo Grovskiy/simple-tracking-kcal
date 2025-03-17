@@ -23,7 +23,6 @@ const CalorieTracker: React.FC<CalorieTrackerProps> = ({
   onDeleteEntry,
   onDateChange,
 }) => {
-
   const dailyEntries = entries.filter((entry: { date: string }) => entry.date === selectedDate);
 
   return (
@@ -35,7 +34,11 @@ const CalorieTracker: React.FC<CalorieTrackerProps> = ({
       </div>
 
       <div className="mx-auto max-w-xl px-4 py-4">
-        <DailyStats entries={dailyEntries} onDeleteEntry={onDeleteEntry} selectedDate={selectedDate} />
+        <DailyStats
+          entries={dailyEntries}
+          onDeleteEntry={onDeleteEntry}
+          selectedDate={selectedDate}
+        />
       </div>
 
       <AddMealEntry products={products} onAddEntry={onAddEntry} selectedDate={selectedDate} />
